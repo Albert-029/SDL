@@ -1,34 +1,68 @@
 #include "SDL/Include/SDL.h"
-#include <stdio.h>
+#include <iostream>
+using namespace std;
 #pragma comment(lib, "SDL/Libraries/SDL2.lib")
 #pragma comment(lib, "SDL/Libraries/SDL2main.lib")
-SDL_Window* window;
-SDL_Surface* surface;
-int init() {
-	window = NULL;
-	surface = NULL;
-
-	if (SDL_Init(SDL_INIT_VIDEO) < 0) {
-		printf("SDL_Init, Error: %d", SDL_GetError());
-		return -1;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 680;
+int main(int argc, char* args[])
+{
+	SDL_Window* window = NULL;
+	SDL_Renderer* blockRender = NULL;
+	SDL_Rect rect;
+	rect.w = 80;
+	rect.h = 70;
+	rect.x = 0;
+	rect.y = 0;
+	SDL_Event e;
+	if (SDL_Init(SDL_INIT_VIDEO) < 0)
+	{
+		cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
 	}
-	window = SDL_CreateWindow("Window Title", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1200, 600, SDL_WINDOW_SHOWN/*,SDL_WINDOW_BORDERLESS*/);
-	if (window == NULL) {
-		printf("SDL_CreateWindow, Error: %d", SDL_GetError());
-		return -1;
+	else
+	{
+		window = SDL_CreateWindow("El cuadrado depre", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		if (window == NULL)
+		{
+			cout << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
+		}
+		else
+		{
+			blockRender = SDL_CreateRenderer(window, -1, 0);
+			
+			while (1) {
+				if (SDL_PollEvent(&e)) {
+					if (e.type == SDL_QUIT) {
+						break;
+					}
+				}
+				while (rect.x < 1280 || rect.y < 680) {
+					rect.x++;
+					rect.y++;
+					if (rect.x == 1280) {
+						rect.x--;
+					}
+					else if (rect.x == 0) {
+						rect.x++;
+					}
+					else if (rect.y == 680) {
+						rect.y--;
+					}
+					else if (rect.y == 0) {
+						rect.y++;
+					}
+					SDL_SetRenderDrawColor(blockRender, 0, 0, 255, 255);
+					SDL_RenderClear(blockRender);
+					SDL_SetRenderDrawColor(blockRender, 255, 0, 0, 255);
+					SDL_RenderFillRect(blockRender, &rect);
+					SDL_RenderPresent(blockRender);
+					SDL_Delay(5);
+				}
+								
+			}
+		}
 	}
-	surface = SDL_GetWindowSurface(window);
-	return 0;
-}
-void Cleanup() {
 	SDL_DestroyWindow(window);
 	SDL_Quit();
-}
-int main(int argc, char*argv[]) {
-	init();
-	SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 142, 204));
-	SDL_UpdateWindowSurface(window);
-	SDL_Delay(3000);
-	Cleanup();
 	return 0;
 }
