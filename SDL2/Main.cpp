@@ -3,8 +3,7 @@
 using namespace std;
 #pragma comment(lib, "SDL/Libraries/SDL2.lib")
 #pragma comment(lib, "SDL/Libraries/SDL2main.lib")
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 680;
+
 int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
@@ -15,15 +14,15 @@ int main(int argc, char* args[])
 	rect.x = 0;
 	rect.y = 0;
 	SDL_Event e;
-	int dirx = 1;
-	int diry = 1;
+	const int SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 680;
+	int dirx = 1, diry = 1;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
 		cout << "SDL could not initialize! SDL_Error: " << SDL_GetError() << endl;
 	}
 	else
 	{
-		window = SDL_CreateWindow("El cuadrado depre", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow("Red Box", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_BORDERLESS /*SDL_WINDOW_SHOWN*/);
 		if (window == NULL)
 		{
 			cout << "Window could not be created! SDL_Error: " << SDL_GetError() << endl;
