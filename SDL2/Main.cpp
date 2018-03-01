@@ -52,7 +52,7 @@ int main(int argc, char* args[])
 					SDL_SetRenderDrawColor(blockRender, 255, 0, 0, 255);
 					SDL_RenderFillRect(blockRender, &rect);
 					SDL_RenderPresent(blockRender);
-					SDL_Delay(5);
+					SDL_Delay(2.5);
 				}			
 			}
 		}
