@@ -43,31 +43,21 @@ int main(int argc, char* args[])
 						{
 						case SDLK_LEFT:
 							rect.x -= 5;
+							break;
 						case SDLK_RIGHT:
 							rect.x += 5;
+							break;
 						case SDLK_UP:
 							rect.y -= 5;
+							break;
 						case SDLK_DOWN:
 							rect.y += 5;
+							break;
 						case SDLK_SPACE:
 							blast.x = rect.x + 80;
 							blast.y = rect.y + 30;
-							break;
-						default:
-							break;
-						}
-					case SDL_KEYUP:
-						switch (e.key.keysym.sym)
-						{
-						case SDLK_LEFT:
-							break;
-						case SDLK_RIGHT:
-							break;
-						case SDLK_UP:
-							break;
-						case SDLK_DOWN:
-							break;
-						case SDLK_SPACE:
+
+							blast.x++;
 							break;
 						default:
 							break;
