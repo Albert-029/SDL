@@ -30,37 +30,50 @@ int main(int argc, char* args[])
 		else
 		{
 			blockRender = SDL_CreateRenderer(window, -1, 0);
-			while (1) {
-				/*while (SDL_PollEvent(&e))
+			while (!quit) {
+				while (SDL_PollEvent(&e))
 				{
 					switch (e.type)
 					{
+					case SDL_QUIT:
+						quit = true;
+						break;
 					case SDL_KEYDOWN:
 						switch (e.key.keysym.sym)
 						{
 						case SDLK_LEFT:
-							rect.x -= 10;
-							break;
+							rect.x -= 5;
 						case SDLK_RIGHT:
-							rect.x += 10;
-							break;
+							rect.x += 5;
 						case SDLK_UP:
-							rect.y -= 10;
-							break;
+							rect.y -= 5;
 						case SDLK_DOWN:
-							rect.y += 10;
-							break;
+							rect.y += 5;
 						case SDLK_SPACE:
 							blast.x = rect.x + 80;
 							blast.y = rect.y + 30;
-							blast.x++;
+							break;
+						default:
+							break;
+						}
+					case SDL_KEYUP:
+						switch (e.key.keysym.sym)
+						{
+						case SDLK_LEFT:
+							break;
+						case SDLK_RIGHT:
+							break;
+						case SDLK_UP:
+							break;
+						case SDLK_DOWN:
+							break;
+						case SDLK_SPACE:
 							break;
 						default:
 							break;
 						}
 					}
-				}*/
-				//Renders
+				}
 				SDL_SetRenderDrawColor(blockRender, 0, 0, 255, 255);
 				SDL_RenderClear(blockRender);
 				SDL_SetRenderDrawColor(blockRender, 255, 0, 0, 255);
@@ -68,16 +81,6 @@ int main(int argc, char* args[])
 				SDL_SetRenderDrawColor(blockRender, 0, 255, 0, 255);
 				SDL_RenderFillRect(blockRender, &blast);
 				SDL_RenderPresent(blockRender);
-				break;
-			}
-			//QUIT
-			while (!quit) {
-				while (SDL_PollEvent(&e) != 0) {
-					if (e.type == SDL_QUIT) {
-						quit = true;
-						break;
-					}
-				}
 			}
 		}
 		SDL_DestroyWindow(window);
