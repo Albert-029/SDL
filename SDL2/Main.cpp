@@ -1,8 +1,6 @@
 #include "SDL/Include/SDL.h"
-
 #pragma comment(lib, "SDL/Libraries/SDL2.lib")
 #pragma comment(lib, "SDL/Libraries/SDL2main.lib")
-
 int main(int argc, char* args[])
 {
 	SDL_Window* window = NULL;
@@ -16,26 +14,52 @@ int main(int argc, char* args[])
 	SDL_Rect blast;
 	blast.w = 30;
 	blast.h = 10;
-	blast.x = -150;
-	blast.y = -150;
+	blast.x = -250;
+	blast.y = -250;
 	const int SCREEN_WIDTH = 1280, SCREEN_HEIGHT = 680;
 	bool quit = false;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-
 	}
 	else
 	{
 		window = SDL_CreateWindow("Red Box", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
-
 		}
 		else
 		{
 			blockRender = SDL_CreateRenderer(window, -1, 0);
-
-			while (rect.x <= 1280 && rect.x >= 0 && rect.y >= 0 && rect.y <= 680) {
+			while (1) {
+				/*while (SDL_PollEvent(&e))
+				{
+					switch (e.type)
+					{
+					case SDL_KEYDOWN:
+						switch (e.key.keysym.sym)
+						{
+						case SDLK_LEFT:
+							rect.x -= 10;
+							break;
+						case SDLK_RIGHT:
+							rect.x += 10;
+							break;
+						case SDLK_UP:
+							rect.y -= 10;
+							break;
+						case SDLK_DOWN:
+							rect.y += 10;
+							break;
+						case SDLK_SPACE:
+							blast.x = rect.x + 80;
+							blast.y = rect.y + 30;
+							blast.x++;
+							break;
+						default:
+							break;
+						}
+					}
+				}*/
 				//Renders
 				SDL_SetRenderDrawColor(blockRender, 0, 0, 255, 255);
 				SDL_RenderClear(blockRender);
@@ -48,7 +72,6 @@ int main(int argc, char* args[])
 			}
 			//QUIT
 			while (!quit) {
-
 				while (SDL_PollEvent(&e) != 0) {
 					if (e.type == SDL_QUIT) {
 						quit = true;
@@ -105,7 +128,7 @@ return 0;
 */
 /* REBOTE
 int dirx = 1, diry = 1;
-
+-- while (rect.x <= 1280 && rect.x >= 0 && rect.y >= 0 && rect.y <= 680) -- 
 rect.x = rect.x + dirx;
 if (rect.x == 1200 || rect.x == 0) {
 dirx = dirx * -1;
